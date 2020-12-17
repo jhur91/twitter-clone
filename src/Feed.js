@@ -3,6 +3,7 @@ import "./Feed.css";
 import TweetBox from "./TweetBox";
 import Post from "./Post";
 import db from "./firebase";
+import FlipMove from "react-flip-move";
 
 function Feed() {
   const [posts, setPosts] = useState([]);
@@ -20,17 +21,21 @@ function Feed() {
       </div>
 
       <TweetBox />
-      {posts.map((post) => (
-        <Post
-          key={post.text}
-          displayName={post.displayName}
-          username={post.username}
-          verified={post.verified}
-          text={post.text}
-          avatar={post.avatar}
-          image={post.image}
-        />
-      ))}
+
+      <FlipMove>
+        {posts.map((post) => (
+          <Post
+            // key is necessary for flipmove, better practice to use something like an id.number
+            key={post.text}
+            displayName={post.displayName}
+            username={post.username}
+            verified={post.verified}
+            text={post.text}
+            avatar={post.avatar}
+            image={post.image}
+          />
+        ))}
+      </FlipMove>
     </div>
   );
 }
